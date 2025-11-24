@@ -38,30 +38,6 @@ npx http-server . -p 8000
 
 Depois, abra `http://localhost:8000` no navegador e navegue até a seção **Projeções** para ver os gráficos.
 
-**Como publicar no GitHub**
-1) Crie um repositório vazio no GitHub.
-2) No PowerShell, adicione o remoto e envie:
-```powershell
-Set-Location 'C:\Users\User\Desktop\PASTA NOVA 100% FUNCIONAL'
-git remote add origin https://github.com/<seu-usuario>/<seu-repo>.git
-git branch -M main
-git push -u origin main
-```
-
-Alternativa usando `gh` (GitHub CLI) para criar e enviar automaticamente:
-```powershell
-Set-Location 'C:\Users\User\Desktop\PASTA NOVA 100% FUNCIONAL'
-gh repo create <seu-usuario>/<seu-repo> --public --source . --remote origin --push
-```
-
-Substitua `<seu-usuario>` e `<seu-repo>` pelos valores reais antes de executar.
-
-**Notas importantes**
-- Se os gráficos não aparecerem, verifique o console do navegador para erros de `fetch` (caminho dos CSVs ou servidor HTTP).
-- O comportamento dos gráficos foi ajustado para evitar problemas de redimensionamento; caso veja crescimento inesperado, abra a seção novamente após recarregar a página.
-- Acessibilidade: acordeões têm suporte a teclado e atributos ARIA.
-
-Se quiser, posso: criar o repositório remoto para você (necessita autenticação `gh` ou token), ou abrir um PR com alterações adicionais.
-
 ---
 Gerado a pedido — ajuste ou adicione mais detalhes se precisar.
+
