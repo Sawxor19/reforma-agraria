@@ -1,0 +1,206 @@
+/* Modern responsive stylesheet for Reforma Agrária app */
+:root{
+  --bg:#f6f8fb;
+  --card:#ffffff;
+  --muted:#617188;
+  --accent:#105b52; /* deep teal */
+  --accent-2:#0b7285; /* secondary teal */
+  --glass: rgba(255,255,255,0.7);
+  --radius:16px;
+  --max-width:1100px;
+  --container-padding:24px;
+  --shadow-1: 0 6px 20px rgba(9,30,66,0.08);
+  --shadow-2: 0 2px 10px rgba(9,30,66,0.06);
+  --line: rgba(9,30,66,0.06);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: linear-gradient(180deg,var(--bg), #eef3f8 120%);
+  color:#0b2130;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+}
+
+.page-shell{max-width:var(--max-width);margin:0 auto;padding:32px var(--container-padding)}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,rgba(16,91,82,0.06), rgba(11,114,133,0.03));padding:22px;border-radius:12px;margin-bottom:28px;display:flex;flex-direction:column;gap:6px}
+.hero h1{margin:0;font-size:1.6rem;line-height:1.05;font-weight:700;color:var(--accent);font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+.hero .hero-lead{margin:0;color:var(--muted);font-weight:500}
+
+/* LAYOUT */
+.layout-split{display:grid;grid-template-columns:260px 1fr;gap:28px;align-items:start;padding:0;border-radius:0;background:transparent;box-shadow:none;margin-top:0}
+.section-nav{position:sticky;top:36px}
+.section-nav ul{list-style:none;padding:14px;margin:0;background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,250,250,0.96));border-radius:14px;box-shadow:var(--shadow-2);border:1px solid var(--line)}
+.section-nav li{margin:8px 0}
+.section-nav a{display:block;padding:10px 12px;border-radius:10px;color:#0f2430;text-decoration:none;font-weight:700}
+.section-nav a:hover{background:linear-gradient(90deg, rgba(11,114,133,0.07), rgba(16,91,82,0.04));color:var(--accent-2)}
+.section-nav a{transition:transform 140ms ease, box-shadow 160ms ease, background-color 160ms ease}
+
+/* CONTENT */
+.content-stack main{background:transparent}
+section{margin-bottom:20px;padding:18px;background:transparent;border-radius:12px}
+section > article{background:var(--card);padding:12px;border-radius:10px;box-shadow:var(--shadow-2);border:1px solid var(--line);margin-bottom:12px}
+
+/* Main panel around nav + content to match dark layout without reducing width */
+.content-shell{background:var(--card);border-radius:20px;padding:18px;box-shadow:var(--shadow-1);display:grid;grid-template-columns:260px 1fr;gap:28px}
+.layout-split > .section-nav, .layout-split > .content-stack{grid-column:auto}
+section h2{margin-top:0;color:var(--accent);font-size:1.25rem}
+section h3{color:#0d2b36;margin:0 0 6px 0;font-size:1rem;font-weight:600}
+p{color:#173844;margin:0 0 8px 0}
+ul.reference-list{columns:1;padding-left:1rem}
+
+.chart-lab{display:grid;grid-template-columns:1fr;gap:18px;margin-top:12px}
+.chart-card{padding:14px;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;
+  background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(255,255,255,0.82));
+  border: 1px solid rgba(16,91,82,0.06);
+  box-shadow: 0 12px 34px rgba(2,6,23,0.06), inset 0 1px 0 rgba(255,255,255,0.7);
+  backdrop-filter: blur(10px) saturate(120%);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+  color: #072226;
+}
+.chart-meta{margin-bottom:8px}
+.chart-title{font-weight:700;margin:0}
+.chart-caption{margin:0;font-size:0.9rem;color:var(--muted)}
+.chart-description{font-size:0.95rem;color:var(--muted);margin-top:10px}
+
+/* Ensure canvases size is driven by the card container to avoid resize loops */
+.chart-card{min-height:280px;max-height:480px}
+.chart-card canvas{width:100%;height:100%;display:block;max-height:420px}
+@media (max-width:1000px){ .chart-card{max-height:420px} }
+@media (max-width:700px){ .chart-card{min-height:200px;max-height:360px} }
+@media (max-width:420px){ .chart-card{min-height:160px;max-height:300px} }
+
+/* Show/hide sections: sections are hidden by default and shown when .active is set */
+.content-stack main > section{display:none}
+.content-stack main > section.active{display:block;animation:fadeIn 220ms ease both}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* Accordion styles for subsection toggles (h3 -> toggle) */
+.accordion-toggle{
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:6px 8px;
+  border-radius:8px;
+  background:transparent;
+  font-weight:600;
+  border:1px solid transparent;
+  font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-size:0.98rem;
+}
+.accordion-toggle:focus{outline:2px solid rgba(11,114,133,0.14);box-shadow:0 4px 14px rgba(11,114,133,0.06)}
+.accordion-toggle[aria-expanded="true"]{background:linear-gradient(90deg, rgba(11,114,133,0.06), rgba(16,91,82,0.03));border-color:var(--line)}
+.accordion-toggle{transition:transform 140ms ease, box-shadow 160ms ease, background-color 160ms ease}
+.accordion-toggle:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(11,114,133,0.06)}
+.accordion-toggle::after{
+  content:'';
+  width:12px;height:12px;display:inline-block;transform:rotate(0deg);transition:transform 200ms ease;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="black" d="M7 10l5 5 5-5z"/></svg>') center / contain no-repeat;
+  background:var(--accent-2);
+}
+.accordion-toggle[aria-expanded="true"]::after{transform:rotate(180deg)}
+
+.accordion-panel{padding:0 6px;overflow:hidden;max-height:0;transition:max-height 260ms ease,padding 200ms ease}
+.accordion-panel[aria-hidden="false"]{padding:8px 6px 6px 6px}
+.accordion-panel p, .accordion-panel ul{margin:0 0 8px 0}
+
+/* Make section-level H3 + its accordion panel appear as a single card */
+section > h3.accordion-toggle{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: var(--shadow-2);
+  padding: 12px;
+  margin-bottom: 6px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+section > h3.accordion-toggle + .accordion-panel{
+  background: var(--card);
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-bottom-left-radius:10px;
+  border-bottom-right-radius:10px;
+  padding:12px;
+  margin-top:-6px;
+}
+
+/* Ensure inner elements of the panel inherit neutral spacing */
+section > h3.accordion-toggle .accordion-indicator{margin-left:8px}
+
+/* Highlight class applied via JS on hover/focus for stronger visual feedback */
+.highlight{
+  box-shadow: 0 12px 34px rgba(11,114,133,0.08) !important;
+  transform: translateY(-3px) !important;
+}
+
+/* COMMENTS FORM WRAPPER */
+.comments-form-wrapper{max-width:760px;margin:24px auto;padding:18px;background:linear-gradient(180deg,rgba(11,114,133,0.03), rgba(16,91,82,0.02));border-radius:var(--radius);box-shadow:var(--shadow-1);border:1px solid var(--line);display:block}
+.comments-form-wrapper iframe{width:100%;min-height:480px;border:0;border-radius:12px;background:var(--card);display:block;overflow:hidden}
+
+/* FOOTER / FINAL HIGHLIGHT */
+.destaque-final{background:linear-gradient(90deg, rgba(11,114,133,0.06), rgba(16,91,82,0.04));padding:14px;border-radius:10px;margin-top:12px;border:1px solid var(--line)}
+
+/* RESPONSIVE */
+@media (max-width:1000px){
+  .layout-split{grid-template-columns:1fr;}
+  .section-nav{order:2;position:relative;top:0}
+  .chart-lab{grid-template-columns:1fr}
+}
+
+/* Create the same visual spacing/overlap between hero and the main panel on wide screens */
+@media (min-width:1000px){
+  .layout-split{margin-top:0}
+}
+
+/* Push the sticky nav further down on wide screens so it doesn't overlap the hero */
+@media (min-width:1000px){
+  .section-nav{ top:48px }
+}
+
+@media (max-width:700px){
+  .page-shell{padding:18px 14px}
+  .hero h1{font-size:1.4rem}
+  section{padding:14px}
+  .comments-form-wrapper iframe{min-height:480px}
+}
+
+@media (max-width:420px){
+  .hero{padding:16px}
+  .hero h1{font-size:1.15rem}
+  .section-nav ul{padding:8px}
+  .comments-form-wrapper{padding:10px}
+  .comments-form-wrapper iframe{min-height:360px}
+}
+
+/* Accessibility helpers */
+.no-js-warning{display:block;background:#fff3cd;padding:8px;border-radius:8px;border:1px solid #ffeeba;color:#856404;margin-bottom:12px}
+
+/* Utility */
+.muted{color:var(--muted)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* Small tweaks to anchors inside content */
+section a{color:var(--accent-2);text-decoration:underline}
+
+/* Footer: center and match site rhythm */
+footer{
+  text-align:center;
+  color:var(--muted);
+  padding:18px 12px;
+  margin-top:22px;
+  font-size:0.95rem;
+}
+
+/* End of stylesheet */
