@@ -37,7 +37,3 @@ npx http-server . -p 8000
 ```
 
 Depois, abra `http://localhost:8000` no navegador e navegue até a seção **Projeções** para ver os gráficos.
-
----
-Gerado a pedido — ajuste ou adicione mais detalhes se precisar.
-
