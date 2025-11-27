@@ -1,4 +1,4 @@
-# PASTA NOVA 100% FUNCIONAL
+Projeto de extensão curricular - UNISANTA 2025
 
 Visão geral do projeto estático criado para apresentar conteúdo, gráficos (Chart.js) e um formulário do Google embutido na página de comentários.
 
@@ -37,3 +37,4 @@ npx http-server . -p 8000
 ```
 
 Depois, abra `http://localhost:8000` no navegador e navegue até a seção **Projeções** para ver os gráficos.
+
